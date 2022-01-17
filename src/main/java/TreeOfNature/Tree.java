@@ -6,10 +6,14 @@ package TreeOfNature;
 public class Tree {
     TrunkTree trunkTree;
     LeafTree leafTree;
+    BrunchTree brunchTree;
+
 
     public Tree(String name, int maxAge) {
         this.leafTree = new LeafTree();
         this.trunkTree = new TrunkTree(name, maxAge);
+        this.brunchTree = new BrunchTree(0, "", 0, false, this.leafTree);
+
     }
 
     /**
@@ -56,7 +60,7 @@ public class Tree {
      * Growth with seasons
      *
      * @param ageGrowth - tree growth age
-     * @param season - season from enum
+     * @param season    - season from enum
      */
 
     public void growthWithSeason(int ageGrowth, Seasons season) {
@@ -87,7 +91,7 @@ public class Tree {
     /**
      * Tree growth in summer
      *
-     * @param ageGrowth - tree growth age
+     * @param ageGrowth  - tree growth age
      * @param isLifeTree - tree status
      */
     protected void springOrSummer(int ageGrowth, boolean isLifeTree) {
@@ -100,21 +104,21 @@ public class Tree {
 
     protected void onlyWinter() {
         for (BrunchTree brunchTree : trunkTree.getBrunchTrees()) {
-            brunchTree.detourLeaves(1);
+            brunchTree.detourLeaves(2);
             brunchTree.leaves.clear();
         }
     }
 
     protected void onlyFall() {
         for (BrunchTree brunchTree : trunkTree.getBrunchTrees()) {
-            brunchTree.detourLeaves(2);
+            brunchTree.detourLeaves(1);
         }
     }
 
     /**
      * Condition of the tree in the fall.
      *
-     * @param ageGrowth - tree growth age
+     * @param ageGrowth  - tree growth age
      * @param isLifeTree - tree status
      */
 
@@ -139,7 +143,7 @@ public class Tree {
     /**
      * Condition of the tree in the winter.
      *
-     * @param ageGrowth - tree growth age
+     * @param ageGrowth  - tree growth age
      * @param isLifeTree - tree status
      */
 
@@ -189,6 +193,7 @@ public class Tree {
 
     /**
      * What are the leaves on the tree
+     *
      * @return - returns a string describing the color of the leaves on the tree.
      */
     public String whatLeaves() {
@@ -196,6 +201,8 @@ public class Tree {
         String colorOfLeaves = "";
         String twoColorOfLeaves = "";
         String response = "";
+        int countLeaves = 0;
+        int twoCountLeaves = 0;
         if (countOfLeaves() == 0) {
             response = "There are no leaves on the tree now.";
             return response;
@@ -209,12 +216,18 @@ public class Tree {
                 if (!colorOfLeaves.equals(brunchTree.leaves.get(i).getColor())) {
                     twoColorOfLeaves = brunchTree.leaves.get(i).getColor();
                 }
+                if (brunchTree.leaves.get(i).getColor().equals(colorOfLeaves)){
+                    countLeaves++;
+                }
+                if (brunchTree.leaves.get(i).getColor().equals(twoColorOfLeaves)){
+                    twoCountLeaves++;
+                }
             }
         }
         if (!twoColorOfLeaves.equals("")) {
-            response = String.format("The tree has %s and %s %s.", colorOfLeaves, twoColorOfLeaves, nameOfLeaves);
+            response = String.format("The tree has %s %s and %s %s %s.", countLeaves, colorOfLeaves, twoCountLeaves,twoColorOfLeaves, nameOfLeaves);
         } else {
-            response = String.format("The tree has %s %s.", colorOfLeaves, nameOfLeaves);
+            response = String.format("The tree has %s %s %s.",countLeaves, colorOfLeaves, nameOfLeaves);
         }
         return response;
     }
@@ -222,4 +235,5 @@ public class Tree {
     protected void setLeafTree(LeafTree leafTree) {
         this.leafTree = leafTree;
     }
+
 }

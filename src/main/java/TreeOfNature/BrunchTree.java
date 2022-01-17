@@ -15,6 +15,7 @@ public class BrunchTree {
     LeafTree leafTree;
 
     public BrunchTree(int age, String name, int ageBranch, boolean isLifeTree, LeafTree leafTree) {
+
         this.name = name;
         this.ageBranch += ageBranch;
         this.maxLeaves += this.ageBranch/2;
@@ -76,13 +77,4 @@ public class BrunchTree {
         isLiveBranch = liveBranch;
     }
 
-
-    @Override
-    public String toString() {
-        return "Branch{" +
-                "name='" + name + '\'' +
-                ", ageBranch=" + ageBranch +
-                ", isLiveBranch=" + isLiveBranch +
-                '}';
-    }
 }
