@@ -36,7 +36,7 @@ class TreeTest {
         String actual = tree.listOfLeaves();
         String actual_1 = coniferTree.whatLeaves();
         String expected = "There are 200 leaves on the tree.";
-        String expected_1 = "The tree has 770 brown and 2280 green needles.";
+        String expected_1 = "The tree has 2440 green and 610 brown needles.";
         assertEquals(expected,actual);
         assertEquals(expected_1,actual_1);
     }
@@ -49,8 +49,8 @@ class TreeTest {
         coniferTree.growthWithSeason(15, Seasons.FALL);
         String actual = tree.whatLeaves();
         String actual_1 = coniferTree.whatLeaves();
-        String expected = "The tree has 4006 yellow and 3994 green Leaf.";
-        String expected_1= "The tree has 437 brown and 1288 green needles.";
+        String expected = "The tree has 3994 green and 4006 yellow leaf.";
+        String expected_1= "The tree has 1380 green and 345 brown needles.";
         assertEquals(expected,actual);
         assertEquals(expected_1,actual_1);
     }
