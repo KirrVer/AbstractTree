@@ -6,7 +6,7 @@ public class LeafTree{
     String color;
 
     public LeafTree() {
-            this.name = "Leaf";
+            this.name = "leaf";
             this.isLiveBranch = true;
             this.color = "green";
     }

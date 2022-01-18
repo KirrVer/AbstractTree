@@ -14,6 +14,10 @@ public class BrunchTree {
     List<LeafTree> leaves;
     LeafTree leafTree;
 
+
+    public BrunchTree() {
+    }
+
     public BrunchTree(int age, String name, int ageBranch, boolean isLifeTree, LeafTree leafTree) {
 
         this.name = name;
@@ -30,18 +34,24 @@ public class BrunchTree {
         for (int i = 0; i < countLeaves; i++) {
             leaves.add(leafTree.getLeaf());
         }
+
+    }
+
+    public BrunchTree addBrunch(int age, String name, int ageBranch, boolean isLifeTree, LeafTree leafTree ){
+        return new BrunchTree(age, name, ageBranch, isLifeTree, leafTree);
     }
 
     public void newLeaves(int ageGrowth) {
         leaves.clear();
         int countLeaves = this.countLevers * (ageGrowth + this.ageBranch);
         for (int i = 0; i < countLeaves; i++) {
-            leaves.add(leafTree);
+            leaves.add(leafTree.getLeaf());
         }
     }
 
     public void detourLeaves(int k) {
-        for (int i = 0; i < leaves.size(); i += k) {
+        for (int i = 0; i < leaves.size(); i = i+k) {
+            leaves.get(i).dying();
             if (!leaves.get(i).isLiveBranch()) {
                 leaves.remove(i);
             } else leaves.get(i).dying();

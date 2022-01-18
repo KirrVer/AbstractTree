@@ -12,7 +12,7 @@ public class Tree {
     public Tree(String name, int maxAge) {
         this.leafTree = new LeafTree();
         this.trunkTree = new TrunkTree(name, maxAge);
-        this.brunchTree = new BrunchTree(0, "", 0, false, this.leafTree);
+        this.brunchTree = new BrunchTree();
 
     }
 
@@ -49,7 +49,7 @@ public class Tree {
             trunkTree.setHigh(ageTree * 2);
             int res = trunkTree.howManyCreateBranches(ageTree, trunkTree.getBrunchTrees().size());
             for (int i = 0; i < res; i++) {
-                trunkTree.setBrunchTrees(new BrunchTree(ageTree, trunkTree.getAge() + i + " branch of " + trunkTree.getNameOfTree(),
+                trunkTree.setBrunchTrees(brunchTree.addBrunch(ageTree, trunkTree.getAge() + i + " branch of " + trunkTree.getNameOfTree(),
                         ageTree - i, isLifeTree, leafTree.getLeaf()));
             }
             trunkTree.setAge(ageTree);
@@ -96,7 +96,7 @@ public class Tree {
      */
     protected void springOrSummer(int ageGrowth, boolean isLifeTree) {
         for (int i = 0; i < trunkTree.howManyCreateBranches(1, trunkTree.getBrunchTrees().size()); i++) {
-            trunkTree.setBrunchTrees(new BrunchTree(ageGrowth, trunkTree.getAge() + i + " branch of "
+            trunkTree.setBrunchTrees(brunchTree.addBrunch(ageGrowth, trunkTree.getAge() + i + " branch of "
                     + trunkTree.getNameOfTree(),
                     ageGrowth - i, isLifeTree, leafTree.getLeaf()));
         }
@@ -130,7 +130,7 @@ public class Tree {
         trunkTree.setCountBranches(ageGrowth);
         trunkTree.setHigh(ageGrowth * 2);
         for (int i = 0; i < trunkTree.howManyCreateBranches(ageGrowth, trunkTree.getBrunchTrees().size()); i++) {
-            trunkTree.setBrunchTrees(new BrunchTree(ageGrowth, trunkTree.getAge() + i + " branch of "
+            trunkTree.setBrunchTrees(brunchTree.addBrunch(ageGrowth, trunkTree.getAge() + i + " branch of "
                     + trunkTree.getNameOfTree(),
                     ageGrowth - i, isLifeTree, leafTree.getLeaf()));
         }
@@ -154,7 +154,7 @@ public class Tree {
         trunkTree.setCountBranches(ageGrowth);
         trunkTree.setHigh(ageGrowth * 2);
         for (int i = 0; i < trunkTree.howManyCreateBranches(ageGrowth, trunkTree.getBrunchTrees().size()); i++) {
-            trunkTree.setBrunchTrees(new BrunchTree(ageGrowth, trunkTree.getAge() + i + " branch of "
+            trunkTree.setBrunchTrees(brunchTree.addBrunch(ageGrowth, trunkTree.getAge() + i + " branch of "
                     + trunkTree.getNameOfTree(),
                     ageGrowth - i, isLifeTree, leafTree.getLeaf()));
         }
@@ -225,7 +225,7 @@ public class Tree {
             }
         }
         if (!twoColorOfLeaves.equals("")) {
-            response = String.format("The tree has %s %s and %s %s %s.", countLeaves, colorOfLeaves, twoCountLeaves,twoColorOfLeaves, nameOfLeaves);
+            response = String.format("The tree has %s %s and %s %s %s.",  twoCountLeaves,twoColorOfLeaves, countLeaves, colorOfLeaves, nameOfLeaves);
         } else {
             response = String.format("The tree has %s %s %s.",countLeaves, colorOfLeaves, nameOfLeaves);
         }
@@ -235,5 +235,8 @@ public class Tree {
     protected void setLeafTree(LeafTree leafTree) {
         this.leafTree = leafTree;
     }
+
+    protected void  setBrunchTree(BrunchTree brunchTree)
+    {this.brunchTree = brunchTree;}
 
 }
